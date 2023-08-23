@@ -51,7 +51,6 @@ Size of cargo: {1}
 Wheels:
 {2}
 ", m_LeadingRefrigeration, m_Cargo,base.ToString());
-
         }
     }
 }

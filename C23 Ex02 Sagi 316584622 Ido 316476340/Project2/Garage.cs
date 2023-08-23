@@ -482,5 +482,12 @@ namespace Project2
                 m_ArrayVehicle.Add(VehicleToAdd);
             }
         }
+        public void InflatingWheels()
+        {
+            m_Message = string.Format("Please enter the license number");
+            Console.WriteLine(m_Message);
+
+        }
+
     }
 }
