@@ -1,0 +1,12 @@
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Project2.csproj.AssemblyReference.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Project2.csproj.SuggestedBindingRedirects.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Project2.csproj.CoreCompileInputs.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Project2.exe.config
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Project2.exe
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Project2.pdb
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Project1.dll
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Project1.pdb
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Project1.dll.config
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Project2.csproj.CopyComplete
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Project2.exe
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Project2.pdb

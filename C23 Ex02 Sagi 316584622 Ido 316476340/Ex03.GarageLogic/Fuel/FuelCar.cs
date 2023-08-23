@@ -4,46 +4,18 @@ using System.Text;
 
 namespace Ex03.GarageLogic.Fuel
 {
-    public class FuelCar : FuelVehicles
+    public class FuelCar : ICar
     {
-        private Color m_Color;
-        private int m_NumOfDoors;
-
+        private Fuell m_FuellCar;
         public FuelCar()
         {
-            int i_NumOfWheels = 4;
-            base.CollectWheels = new Wheel[i_NumOfWheels];
+            this.m_FuellCar = new Fuell();
         }
 
-        public Color Color
+        public Fuell FuellCar
         {
-            get
-            {
-                return m_Color;
-            }
-            set
-            {
-                this.Color = value; 
-            }
+            get { return this.m_FuellCar; }
         }
-        public int NumOfDoors
-        {
-            set
-            {
-                this.m_NumOfDoors = value;
-            }
-            get
-            {
-                return this.m_NumOfDoors;
-            }
-        }
-    }
-    public enum Color
-    {
-        Black,
-        White,
-        Red,
-        Blue
     }
 }
 
