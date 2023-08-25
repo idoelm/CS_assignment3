@@ -9,16 +9,7 @@ namespace Project1
 {
     public class Fuel : TypeEngine
     {
-            private TypeFuel m_MyTypeFuel;
-            private float m_CurrentAmountLiters;
-            private float m_MaxAmountFuel;
-
-        public override float PercentageCalculation()
-        {
-
-            return (((((m_CurrentAmountLiters / m_MaxAmountFuel) / 100)) * 100));
-        }
-                 
+        private TypeFuel m_MyTypeFuel;
             public TypeFuel MyTypeFuel
             {
                 set
@@ -30,44 +21,22 @@ namespace Project1
                     return m_MyTypeFuel;
                 }
             }
-            public float CurrentAmountLiters
+        public void Refueling(float i_LitersToAdd, TypeFuel i_MyTypeFuel)
+        {
+            if (i_MyTypeFuel != m_MyTypeFuel)
             {
-                set
-                {
-                    this.m_CurrentAmountLiters = value;
-                }
-                get
-                {
-                    return m_CurrentAmountLiters;
-                }
+                throw new ArgumentException();
             }
-            public float MaxAmountFuel
-            {
-                set
-                {
-                    this.m_MaxAmountFuel = value;
-                }
-                get
-                {
-                    return m_MaxAmountFuel;
-                }
-            }
-            public void Refueling(float i_Amount, string i_MyTypeFuel)
-            {
-                if (i_MyTypeFuel.Equals(i_MyTypeFuel))
-                {
-                    this.CurrentAmountLiters += i_Amount;
-                }
-            }
+            base.fillingEnergySource(i_LitersToAdd);
+        }
         public override string ToString()
         {
             return string.Format(@"
 Type fuel: {0}
-Max amount fuel: {1}
-Current amount: {2}
-", m_MyTypeFuel, m_MaxAmountFuel, m_CurrentAmountLiters);
+Max amount fuel: {1} Liters
+Current amount: {2} Liters
+", m_MyTypeFuel, MaxAmountEnergy, AmountEnergyLeft);
         }
-
         public enum TypeFuel
             {
                 Soler,

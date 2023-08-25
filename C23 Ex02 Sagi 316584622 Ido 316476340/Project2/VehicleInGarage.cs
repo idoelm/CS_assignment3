@@ -67,8 +67,7 @@ namespace Project2
             return string.Format(@"Details of owner:
 Owner Name: {0}
 Owner's phone number: {1}
-Status: {2}
-{3}", m_NameOwner,m_PhoneOwner, m_MyStatus,MyVehicle);
+Status: {2}{3}", m_NameOwner,m_PhoneOwner, m_MyStatus,MyVehicle);
         }
     }
     public enum Status

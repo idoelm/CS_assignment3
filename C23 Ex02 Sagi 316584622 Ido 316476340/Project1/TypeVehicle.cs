@@ -23,7 +23,6 @@ namespace Project1.Definitions
         public override string ToString()
         {
             return string.Join("\n", CollectWheels.Select((w, index) => $"wheel number: {index + 1}: {w}"));
-            
         }
     }
 }

@@ -38,7 +38,6 @@
   <ItemGroup>
     <Compile Include="check.cs" />
     <Compile Include="Garage.cs" />
-    <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="VehicleInGarage.cs" />
   </ItemGroup>
   <ItemGroup>
