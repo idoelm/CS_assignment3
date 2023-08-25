@@ -270,7 +270,7 @@ namespace Project2
             //a.MyVehicle.MyEngine = new Fuel();
             //a.MyStatus = Status.Repair;
 
-            PrintByStatus(Status.Repair);
+            //PrintByStatus(Status.Repair);
             //m_ArrayVehicle.Add(a);
             //ChangeStatus(ref g, Status.Paid);
             //Console.WriteLine(a.MyStatus);
