@@ -41,7 +41,7 @@ namespace Project1.Definitions
         {
             if (m_AmountEnergyLeft + i_AmountToAdd > m_MaxAmountEnergy)
             {
-                throw new ValueOutOfRangeException("An amount above the maximum capacity has been entered");
+                throw new ValueOutOfRangeException(m_AmountEnergyLeft + i_AmountToAdd,m_MaxAmountEnergy,0);
             }
             m_AmountEnergyLeft += i_AmountToAdd;
         }

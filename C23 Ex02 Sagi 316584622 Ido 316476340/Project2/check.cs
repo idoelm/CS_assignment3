@@ -146,7 +146,7 @@ namespace Project2
                 {
                     if (remaining > maxCapacity)
                     {
-                        throw new ValueOutOfRangeException("Entering a larger amount than the maximum capacity");
+                     //   throw new ValueOutOfRangeException("Entering a larger amount than the maximum capacity");
                     }
                 }
                 catch (FormatException)
@@ -259,6 +259,8 @@ namespace Project2
 
         public static void Main()
         {
+
+
             Garage myGarage = new Garage();
             myGarage.StartGarage();
             //VehicleInGarage a = new VehicleInGarage();

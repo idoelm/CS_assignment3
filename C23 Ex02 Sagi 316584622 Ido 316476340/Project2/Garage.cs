@@ -123,10 +123,19 @@ namespace Project2
                 Console.WriteLine(m_Message);
                 input = Console.ReadLine();
                 currentAirPressure = float.Parse(input);
+                if (currentAirPressure > maxAirPressure) 
+                {
+                    throw new ValueOutOfRangeException(currentAirPressure,maxAirPressure,0);
+                }
             }
             catch (FormatException)
             {
                 Console.WriteLine("Invalid input");
+                return false;
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine(ex);
                 return false;
             }
             if ((o_NewVehicle.MyVehicle.MyTypeVehicle is Motorcycle))
@@ -216,7 +225,7 @@ namespace Project2
                 {
                     if (remaining > maxCapacity)
                     {
-                        throw new ValueOutOfRangeException("Entering a larger amount than the maximum capacity");
+                        throw new ValueOutOfRangeException(remaining,maxCapacity,0);
                     }
                 }
                 catch (FormatException)
@@ -477,8 +486,8 @@ namespace Project2
                 m_Vehicle.MyStatus = Status.Repair;
                 m_Vehicle.MyVehicle.LicenseNumber = m_MyLicenseNumber;
                 SetModelName(ref m_Vehicle);
-                while (!ChooseVehicleType(ref m_Vehicle)) ;
-                SetWheelPressure(ref m_Vehicle);
+                while (!ChooseVehicleType(ref m_Vehicle));
+                while (!SetWheelPressure(ref m_Vehicle));
                 while (!SetEnergy(ref m_Vehicle)) ;
                 if (m_Vehicle.MyVehicle.MyTypeVehicle is Car)
                 {
@@ -543,9 +552,10 @@ namespace Project2
                     case "1":
                     case "yes":
                         {
-                            PrintByStatus(Status.Repair);
-                            PrintByStatus(Status.Fixed);
-                            PrintByStatus(Status.Paid);
+                            for (int i = 1; i < sizeof(Status); i++ )
+                            {
+                                PrintByStatus((Status)i);
+                            }
                             break;
                         }
                     case "2":
@@ -710,6 +720,12 @@ Choose the following option:
                                     break;
                                 }
                             case "6":
+                            case "Reamove Vehicle":
+                                {
+                                    ReamoveVehicle();
+                                    break;
+                                }
+                            case "7":
                             case "Exite":
                                 {
                                     m_Exit = true;

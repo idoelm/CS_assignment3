@@ -72,8 +72,8 @@ Status: {2}{3}", m_NameOwner,m_PhoneOwner, m_MyStatus,MyVehicle);
     }
     public enum Status
     {
-        Repair,
-        Fixed,
-        Paid
+        Repair = 1,
+        Fixed = 2,
+        Paid = 3
     }
 }

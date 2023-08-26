@@ -8,9 +8,26 @@ namespace Project1
 {
     public class ValueOutOfRangeException : Exception
     {
-        public ValueOutOfRangeException(string message) : base(message)
+
+        private float maxValue;
+        private float minValue;
+
+        public ValueOutOfRangeException(float value, float maxValue, float minValue) : base(string.Format("The value {0} is out of range.", value))
         {
+            this.maxValue = maxValue;
+            this.minValue = minValue;
+        }
+
+        public float GetMaxValue()
+        {
+            return maxValue;
+        }
+
+        public float GetMinValue()
+        {
+            return minValue;
         }
     }
+
 
 }
