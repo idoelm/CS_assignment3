@@ -8,14 +8,18 @@ namespace Ex03.ConsoleUI
 {
     public class VehicleInGarage
     {
-        private Vehicles m_MyVehicle;
+        private Vehicle m_MyVehicle;
         private String m_NameOwner;
         private String m_PhoneOwner;
         private Status m_MyStatus;
 
-        public Vehicles MyVehicle
+        public VehicleInGarage()
         {
-            set 
+            m_MyVehicle = new Vehicle();
+        }
+        public Vehicle MyVehicle
+        {
+            set
             {
                 m_MyVehicle = value;
             }
@@ -37,7 +41,7 @@ namespace Ex03.ConsoleUI
         }
         public String PhoneOwner
         {
-            set 
+            set
             {
                 m_PhoneOwner = value;
             }
@@ -57,11 +61,20 @@ namespace Ex03.ConsoleUI
                 return m_MyStatus;
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format(@"Details of owner:
+Owner Name: {0}
+Owner's phone number: {1}
+Status: {2}{3}", m_NameOwner,m_PhoneOwner, m_MyStatus,MyVehicle);
+        }
+        public enum Status
+        {
+            Repair = 1,
+            Fixed = 2,
+            Paid = 3
+        }
     }
-    public enum Status
-    {
-        Repair,
-        Fixed,
-        Paid
-    }
+
 }

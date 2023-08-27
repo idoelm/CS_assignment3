@@ -1,62 +1,49 @@
-﻿using System;
+﻿using Ex03.GarageLogic.Definitions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class Fuell
+    public class Fuel : TypeEngine
     {
         private TypeFuel m_MyTypeFuel;
-        private float m_CurrentAmountLiters;
-        private float m_MaxAmountFuel;
-        public TypeFuel MyTypeFuel
+            public TypeFuel MyTypeFuel
+            {
+                set
+                {
+                    this.m_MyTypeFuel = value;
+                }
+                get
+                {
+                    return m_MyTypeFuel;
+                }
+            }
+        public void Refueling(float i_LitersToAdd, TypeFuel i_MyTypeFuel)
         {
-            set
+            if (i_MyTypeFuel != m_MyTypeFuel)
             {
-                this.m_MyTypeFuel = value;
+                throw new ArgumentException();
             }
-            get
-            {
-                return m_MyTypeFuel;
-            }
+            base.fillingEnergySource(i_LitersToAdd);
         }
-        public float CurrentAmountLiters
+        public override string ToString()
         {
-            set
-            {
-                this.m_CurrentAmountLiters = value;
-            }
-            get
-            {
-                return m_CurrentAmountLiters;
-            }
+            return string.Format(@"
+Type fuel: {0}
+Max amount fuel: {1} Liters
+Current amount: {2} Liters
+", m_MyTypeFuel, MaxAmountEnergy, AmountEnergyLeft);
         }
-        public float MaxAmountFuel
-        {
-            set
-            {
-                this.m_MaxAmountFuel = value;
-            }
-            get
-            {
-                return m_MaxAmountFuel;
-            }
-        }
-        public void Refueling(float i_Amount, string i_MyTypeFuel)
-        {
-            if (i_MyTypeFuel.Equals(i_MyTypeFuel))
-            {
-                this.CurrentAmountLiters += i_Amount;
-            }
-        }
-
         public enum TypeFuel
-        {
-            Soler,
-            Octan95,
-            Octan96,
-            Octan98,
+            {
+                Soler,
+                Octan95,
+                Octan96,
+                Octan98,
+            }
         }
     }
-}
 

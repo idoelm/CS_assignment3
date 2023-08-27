@@ -1,3 +1,12 @@
-C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.AssemblyReference.cache
-C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.SuggestedBindingRedirects.cache
-C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Ex03.ConsoleUI.csproj.AssemblyReference.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Ex03.ConsoleUI.csproj.SuggestedBindingRedirects.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Ex03.ConsoleUI.exe.config
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Ex03.ConsoleUI.exe
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Ex03.ConsoleUI.pdb
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Ex03.GarageLogic.dll
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Ex03.GarageLogic.pdb
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\bin\Debug\Ex03.GarageLogic.dll.config
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Ex03.ConsoleUI.csproj.CopyComplete
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Ex03.ConsoleUI.exe
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project2\obj\Debug\Ex03.ConsoleUI.pdb

@@ -1,0 +1,7 @@
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project1\bin\Debug\Ex03.GarageLogic.dll.config
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project1\bin\Debug\Ex03.GarageLogic.dll
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project1\bin\Debug\Ex03.GarageLogic.pdb
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project1\obj\Debug\Ex03.GarageLogic.csproj.AssemblyReference.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project1\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project1\obj\Debug\Ex03.GarageLogic.dll
+C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Project1\obj\Debug\Ex03.GarageLogic.pdb

@@ -1,40 +1,27 @@
-﻿using System;
+﻿using Ex03.GarageLogic.Definitions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Electricc
+    public class Electric : TypeEngine
     {
-        private float m_TimeLeft;
-        private float m_MaxTime;
-
-        public float TimeLeft
-        {
-            set
-            {
-                m_TimeLeft = value;
-            }
-            get
-            {
-                return m_TimeLeft;
-            }
-        }
-        public float MaxTime
-        {
-            set
-            {
-                this.m_MaxTime = value;
-            }
-            get
-            {
-                return this.m_MaxTime;
-            }
-        }
         public void charging(float i_AddTime)
         {
-            this.m_TimeLeft += i_AddTime;
+
+            base.fillingEnergySource(i_AddTime);
         }
+        public override string ToString()
+        {
+            return string.Format(@"
+Max time: {0} hours
+Time left: {1} hours
+", MaxAmountEnergy, AmountEnergyLeft);
+
+        }
+
     }
 }
-

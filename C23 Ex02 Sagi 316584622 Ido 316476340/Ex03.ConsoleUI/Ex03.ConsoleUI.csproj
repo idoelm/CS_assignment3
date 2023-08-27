@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6E2CFF7C-F7ED-4025-B153-9062EE6EC3F1}</ProjectGuid>
+    <ProjectGuid>{53957C01-5480-4D8E-A3B8-39A113594E4E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Ex03.ConsoleUI</RootNamespace>
     <AssemblyName>Ex03.ConsoleUI</AssemblyName>
@@ -36,13 +36,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValueOutOfRangeException.cs" />
-    <Compile Include="VehicleInGarage.cs" />
+    <Compile Include="check.cs" />
     <Compile Include="Garage.cs" />
+    <Compile Include="VehicleInGarage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ex03.GarageLogic">
-      <HintPath>..\Ex03.GarageLogic\bin\Debug\netstandard2.0\Ex03.GarageLogic.dll</HintPath>
+      <HintPath>..\Project1\bin\Debug\Ex03.GarageLogic.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

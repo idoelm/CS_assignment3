@@ -1,52 +1,41 @@
 ﻿using Ex03.GarageLogic;
-using Ex03.GarageLogic.Electric;
-using Ex03.GarageLogic.Fuel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using static Ex03.GarageLogic.Fuel.FuelVehicles;
-
 namespace Ex03.ConsoleUI
 {
-    internal class Garage
+    public class Garage
     {
-        private List <VehicleInGarage> m_ArrayVehicle = new List<VehicleInGarage>();
+        private List<VehicleInGarage> m_ArrayVehicle = new List<VehicleInGarage>();
+        private VehicleInGarage m_Vehicle = new VehicleInGarage();
         private string m_Message;
-        private string m_LicenseNumberToCheck;
-        private string choice;
+        private string m_Message2;
+        private string m_MyLicenseNumber;
+        private string input;
+        private bool m_Exit = false;
+        private bool m_IsBool;
+        protected VehicleInGarage SearchLicenseNumber()
+        {
+            m_Message = string.Format("Enter the license number");
+            Console.WriteLine(m_Message);
+            m_MyLicenseNumber = Console.ReadLine();
+            return m_ArrayVehicle.Find(vehicle => vehicle.MyVehicle.LicenseNumber == m_MyLicenseNumber);
+        }
+        protected void SetModelName(ref VehicleInGarage o_NewVehicle)
+        {
+            m_Message = string.Format("Enter the vehicle model");
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            o_NewVehicle.MyVehicle.NameOfModel = input;
+        }
+        protected bool ChooseVehicleType(ref VehicleInGarage o_NewVehicle)
+        {
+            m_IsBool = true;
+            Vehicle newVehicleToCreate = new Vehicle();
 
-        public bool CheckValidLicenseNumber(ref string licenseNumberToCheck)
-        {
-            try
-            {
-                int number = int.Parse(licenseNumberToCheck);
-            }
-            catch (ArgumentException ex)
-            {
-                m_Message = string.Format("Invalid license number");
-                Console.WriteLine(m_Message);
-                return false;
-            }
-            return true;
-        }
-        public bool SerachLicenseNumber(ref string i_licenseNumberToCheck, ref VehicleInGarage o_Vehicle)
-        {
-            foreach (VehicleInGarage vehicle in m_ArrayVehicle)
-            {
-                if (string.Equals(vehicle.MyVehicle.LicenseNumber, i_licenseNumberToCheck))
-                {
-                    o_Vehicle = vehicle;
-                    return true;    
-                }
-            }
-            return false;
-        }
-        public bool ChoosVehicleType(ref VehicleInGarage o_NewVehicle)
-        {
-            
             m_Message = string.Format(@"Please choose the vehicle type
 1. Fuel car
 2. Fuel motorcycle
@@ -54,40 +43,50 @@ namespace Ex03.ConsoleUI
 4. Electric motorcycle
 5. Truck");
             Console.WriteLine(m_Message);
-            choice = Console.ReadLine();
+            input = Console.ReadLine();
             try
             {
-                switch (choice)
+                switch (input)
                 {
                     case "1":
                     case "Fuel car":
                         {
-                            o_NewVehicle.MyVehicle = new FuelCar();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 1);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Fuel();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Car();
+                            break;
                         }
                     case "2":
                     case "Fuel motorcycle":
                         {
-                            o_NewVehicle.MyVehicle = new FuelMotorcycle();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 2);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Fuel();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Motorcycle();
+                            break;
                         }
                     case "3":
                     case "Electric car":
                         {
-                            o_NewVehicle.MyVehicle = new ElectricCar();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 3);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Electric();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Car();
+                            break;
                         }
                     case "4":
                     case "Electric motorcycle":
                         {
-                            o_NewVehicle.MyVehicle = new ElectricMotorcycle();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 4);
+                            o_NewVehicle.MyVehicle.MyEngine = new Electric();
+                            o_NewVehicle.MyVehicle.MyTypeVehicle = new Motorcycle();
+                            break;
                         }
                     case "5":
                     case "Truck":
                         {
-                            o_NewVehicle.MyVehicle = new Truck();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 5);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Fuel();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Truck();
+                            break;
                         }
                     default:
                         {
@@ -98,37 +97,81 @@ namespace Ex03.ConsoleUI
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return false;
+                m_IsBool = false;
             }
-
-        }
-        public bool SetEnergy(ref VehicleInGarage o_NewVehicle)
-        {
-            float m_MaxCapacity;
-            float m_AmountLeft;
-            if (o_NewVehicle is ElectricVehicles)
+            if(m_IsBool)
             {
-                m_Message = string.Format("Please enter the battery capacity (in hours)");
+                o_NewVehicle.MyVehicle = newVehicleToCreate;
+
+            }
+            return m_IsBool;
+        }
+        protected bool SetWheelPressure(ref VehicleInGarage o_NewVehicle)
+        {
+            m_IsBool = true;
+            float maxAirPressure = 0;
+            float currentAirPressure = 0;
+            int numOfWheel = 0;
+            string nameOfManufacturer;
+            m_Message = string.Format("Enter the name of the manufacturer of the wheels");
+            Console.WriteLine(m_Message);
+            nameOfManufacturer = Console.ReadLine();
+            m_Message = string.Format("What is the Max air pressure in the wheels?");
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            try
+            {
+                maxAirPressure = float.Parse(input);
+                m_Message = string.Format("What is the air pressure in the wheels now?");
                 Console.WriteLine(m_Message);
-                m_MaxCapacity = float.Parse(Console.ReadLine());
-                ((ElectricVehicles)o_NewVehicle.MyVehicle).MaxTime = m_MaxCapacity;
-                m_Message = string.Format("Please enter the number of hours left");
-                Console.WriteLine(m_Message);
-                m_AmountLeft = float.Parse(Console.ReadLine());
-                try
+                input = Console.ReadLine();
+                currentAirPressure = float.Parse(input);
+                if (currentAirPressure > maxAirPressure)
                 {
-                    if (m_AmountLeft > m_MaxCapacity)
+                    throw new ValueOutOfRangeException(currentAirPressure, maxAirPressure, 0);
+                }
+                else
+                {
+                    if ((o_NewVehicle.MyVehicle.MyTypeVehicle is Motorcycle))
                     {
-                        throw new ValueOutOfRangeException("Entering a larger amount than the maximum capacity");
+                        numOfWheel = 2;
+                    }
+                    else if ((o_NewVehicle.MyVehicle.MyTypeVehicle is Car))
+                    {
+                        numOfWheel = 4;
+                    }
+                    else
+                    {
+                        numOfWheel = 8;
+                    }
+
+                    for (int i = 0; i < numOfWheel; i++)
+                    {
+                        o_NewVehicle.MyVehicle.MyTypeVehicle.CollectWheels[i].NameOfMaker = nameOfManufacturer;
+                        o_NewVehicle.MyVehicle.MyTypeVehicle.CollectWheels[i].CurrentAirPressure = currentAirPressure;
+                        o_NewVehicle.MyVehicle.MyTypeVehicle.CollectWheels[i].MaxAirPressure = maxAirPressure;
                     }
                 }
-                catch (ValueOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex);
-                    return false;
-                }
             }
-            else
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input");
+                m_IsBool = false;
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine(ex);
+                m_IsBool = false;
+            }
+            return m_IsBool;
+        }
+        protected bool SetEnergy(ref VehicleInGarage o_TheVehicle)
+        {
+            m_IsBool = true;
+            float maxCapacity;
+            float remaining;
+            Fuel.TypeFuel? TypeOfFuel = null;
+            if (o_TheVehicle.MyVehicle.MyEngine is Fuel)
             {
                 m_Message = string.Format(@"Please select the type of fuel
 1. Soler
@@ -136,103 +179,621 @@ namespace Ex03.ConsoleUI
 3. Octan96
 4. Octan98");
                 Console.WriteLine(m_Message);
-                choice = Console.ReadLine();
+                input = Console.ReadLine();
                 try
                 {
-                    switch (choice)
+                    switch (input)
                     {
                         case "1":
                         case "Soler":
-                            ((FuelVehicles)o_NewVehicle.MyVehicle).MyTypeFuel = TypeFuel.Soler;
+                            TypeOfFuel = Fuel.TypeFuel.Soler;
                             break;
                         case "2":
                         case "Octan95":
-                            ((FuelVehicles)o_NewVehicle.MyVehicle).MyTypeFuel = TypeFuel.Octan95;
+                            TypeOfFuel = Fuel.TypeFuel.Octan95;
                             break;
                         case "3":
                         case "Octan96":
-                            ((FuelVehicles)o_NewVehicle.MyVehicle).MyTypeFuel = TypeFuel.Octan96;
+                            TypeOfFuel = Fuel.TypeFuel.Octan96;
                             break;
                         case "4":
                         case "Octan98":
-                            ((FuelVehicles)o_NewVehicle.MyVehicle).MyTypeFuel = TypeFuel.Octan98;
+                            TypeOfFuel = Fuel.TypeFuel.Octan98;
                             break;
                         default:
-                            throw new Exception("Wrong choice");
+                            throw new ArgumentException("Wrong input");
                     }
                 }
-                catch (Exception ex)
+                catch (ArgumentException ex)
                 {
                     Console.WriteLine(ex);
-                    return false;
+                    m_IsBool = false;
                 }
             }
-            return true;
+
+            if (o_TheVehicle.MyVehicle.MyEngine.MaxAmountEnergy == 0)
+            {
+                if (o_TheVehicle.MyVehicle.MyEngine is Fuel)
+                {
+                    m_Message = string.Format("Please enter the tank capacity (in liters)");
+                    m_Message2 = string.Format("Please enter the number of liters left");
+                    (o_TheVehicle.MyVehicle.MyEngine as Fuel).MyTypeFuel = TypeOfFuel.Value;
+                }
+                else
+                {
+                    m_Message = string.Format("Please enter the battery capacity (in hours)");
+                    m_Message2 = string.Format("Please enter the number of hours left");
+                }
+                Console.WriteLine(m_Message);
+                maxCapacity = float.Parse(Console.ReadLine());
+                Console.WriteLine(m_Message2);
+                remaining = float.Parse(Console.ReadLine());
+                try
+                {
+                    if (remaining > maxCapacity)
+                    {
+                        throw new ValueOutOfRangeException(remaining,maxCapacity,0);
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input");
+                    m_IsBool = false;
+                }
+
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine(ex);
+                    m_IsBool = false;
+                }
+                if(m_IsBool)
+                {
+                    o_TheVehicle.MyVehicle.MyEngine.MaxAmountEnergy = maxCapacity;
+                    o_TheVehicle.MyVehicle.MyEngine.AmountEnergyLeft = remaining;
+                    m_IsBool = true;
+                }    
+
+            }
+            else
+            {
+                try
+                {
+                    if ((o_TheVehicle.MyVehicle.MyEngine is Fuel))
+                    {
+                        m_Message = string.Format("How many liters to add?");
+                        Console.WriteLine(m_Message);
+                        input = Console.ReadLine();
+                        (o_TheVehicle.MyVehicle.MyEngine as Fuel).Refueling(float.Parse(input), TypeOfFuel.Value);
+                    }
+                    else if (o_TheVehicle.MyVehicle.MyEngine is Electric)
+                    {
+                        m_Message = string.Format("How many hours to add?");
+                        Console.WriteLine(m_Message);
+                        input = Console.ReadLine();
+                        (o_TheVehicle.MyVehicle.MyEngine as Electric).charging(float.Parse(input));
+                    }
+                    m_IsBool = true;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input");
+                    m_IsBool = false;
+                }
+
+                catch (ValueOutOfRangeException)
+                {
+                    Console.WriteLine("An amount above the maximum capacity has been entered");
+                    m_IsBool = false;
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("you have selected a type of fuel that is not compatible with your vehicle.");
+                    m_IsBool = false;
+                }
+            }
+            return m_IsBool;
         }
-        public bool DefiningCarProperties(ref VehicleInGarage o_NewVehicle)
+        protected bool ChooseColorCar(ref VehicleInGarage o_NewVehicle)
         {
+            m_IsBool = true;
             m_Message = string.Format(@"Please select the car color: 
 1. Balck
 2. White
 3. Red
 4. Blue");
             Console.WriteLine(m_Message);
-            choice = Console.ReadLine();
-            try 
+            input = Console.ReadLine();
+            try
             {
-                switch (choice)
+                switch (input)
                 {
                     case "1":
                     case "Black":
-
+                        (o_NewVehicle.MyVehicle.MyTypeVehicle as Car).MyColor = Color.Black;
                         break;
                     case "2":
                     case "White":
-
+                        (o_NewVehicle.MyVehicle.MyTypeVehicle as Car).MyColor = Color.White;
                         break;
                     case "3":
                     case "Red":
-
+                        (o_NewVehicle.MyVehicle.MyTypeVehicle as Car).MyColor = Color.Red;
                         break;
                     case "4":
                     case "blue":
-
+                        (o_NewVehicle.MyVehicle.MyTypeVehicle as Car).MyColor = Color.Blue;
                         break;
                     default:
-                        throw new Exception("Wrong choice");
-                    }
+                        throw new Exception("Wrong input");
+                }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return false;
+               m_IsBool = false;
             }
-
-            return true;
+            return m_IsBool;
         }
-        public void Add()
+        protected bool SetNumOfDoors(ref VehicleInGarage o_NewVehicle)
         {
-            VehicleInGarage VehicleToAdd = new VehicleInGarage();
-            do
+            m_IsBool = true;
+            m_Message = string.Format("How many doors does your car have? (2-5)");
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            try
             {
-                m_Message = string.Format("Enter the license number");
-                m_LicenseNumberToCheck = Console.ReadLine();
-
-            } while (!CheckValidLicenseNumber(ref m_LicenseNumberToCheck));
-
-            if(SerachLicenseNumber(ref m_LicenseNumberToCheck,ref VehicleToAdd)) 
+                if (int.Parse(input) <= 1 || int.Parse(input) >= 6)
+                {
+                    throw new ArgumentException("The number of doors must be between 2 and 5");
+                    (o_NewVehicle.MyVehicle.MyTypeVehicle as Car).NumOfDoors = int.Parse(input);
+                }
+            }
+            catch (ArgumentException ex)
             {
-                VehicleToAdd.MyStatus = Status.Repair;
+                Console.WriteLine(ex);
+                m_IsBool = false;
+            }
+            return m_IsBool;
+        }
+        protected bool SetTypeLiLicense(ref VehicleInGarage o_NewVehicle)
+        {
+            m_IsBool = true;
+            m_Message = string.Format(@"What type of motorcycle license do you have?
+1.A
+2.A1
+3.A2
+4.AB");
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            try
+            {
+                switch (input)
+                {
+                    case "1":
+                    case "A":
+                        {
+                            (o_NewVehicle.MyVehicle.MyTypeVehicle as Motorcycle).MyTypeLicense = TypeLicense.A;
+                            break;
+                        }
+                    case "2":
+                    case "A1":
+                        {
+                            (o_NewVehicle.MyVehicle.MyTypeVehicle as Motorcycle).MyTypeLicense = TypeLicense.A1;
+                            break;
+                        }
+                    case "3":
+                    case "A2":
+                        {
+                            (o_NewVehicle.MyVehicle.MyTypeVehicle as Motorcycle).MyTypeLicense = TypeLicense.A2;
+                            break;
+                        }
+                    case "4":
+                    case "AB":
+                        {
+                            (o_NewVehicle.MyVehicle.MyTypeVehicle as Motorcycle).MyTypeLicense = TypeLicense.AB;
+                            break;
+                        }
+                    default:
+                        throw new Exception("Invalid selection");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                m_IsBool = false;
+            }
+            return m_IsBool;
+        }
+        protected bool SetEngineCapacity(ref VehicleInGarage o_NewVehicle)
+        {
+            m_IsBool = true;   
+            m_Message = string.Format("What is the size of your engine in cc?");
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            try
+            {
+                (o_NewVehicle.MyVehicle.MyTypeVehicle as Motorcycle).EngineCapacity = int.Parse(input);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input");
+                m_IsBool = false;
+            }
+            return m_IsBool;
+        }
+        protected bool SetTruckDefinitions(ref VehicleInGarage o_NewVehicle)
+        {
+            m_IsBool= true;
+            m_Message = string.Format(@"Does the truck transport refrigerated?
+1.yes
+2.no");
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            try
+            {
+                switch (input)
+                {
+                    case "1":
+                    case "yes":
+                        {
+                            (o_NewVehicle.MyVehicle.MyTypeVehicle as Truck).LeadingRefrigeration = true;
+                            break;
+                        }
+                    case "2":
+                    case "no":
+                        {
+                            (o_NewVehicle.MyVehicle.MyTypeVehicle as Truck).LeadingRefrigeration = false;
+                            break;
+                        }
+                    default:
+                        {
+                            throw new Exception("Invalid selection");
+                        }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                m_IsBool = false;
+            }
+            if(m_IsBool)
+            {
+                m_Message = string.Format("What is the size of the cargo");
+                Console.WriteLine(m_Message);
+                input = Console.ReadLine();
+                try
+                {
+                    (o_NewVehicle.MyVehicle.MyTypeVehicle as Truck).Cargo = float.Parse(input);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input");
+                    m_IsBool = false;
+                }
+            }
+           return m_IsBool;
+        }
+        protected bool InsertOwnerDetails(ref VehicleInGarage o_NewVehicle)
+        {
+            m_IsBool = true;
+            m_Message = string.Format("what is the vehicle owner's name?");
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            if (!input.All(Char.IsLetter))
+            {
+                Console.WriteLine("Invalid input");
+                m_IsBool =  false;
+            }
+            if(m_IsBool)
+            {
+                o_NewVehicle.NameOwner = input;
+                m_Message = string.Format("what is the vehicle owner's phone?");
+                Console.WriteLine(m_Message);
+                input = Console.ReadLine();
+                if (!input.All(Char.IsDigit))
+                {
+                    Console.WriteLine("Invalid input");
+                    m_IsBool = false;
+                }
+                if (m_IsBool)
+                {
+                    o_NewVehicle.PhoneOwner = input;
+
+                }
+            }
+            return m_IsBool;
+        }
+        protected void Add()
+        {
+            m_Vehicle = SearchLicenseNumber();
+            if (m_Vehicle == null)
+            {
+                m_Vehicle = new VehicleInGarage();
+                m_Vehicle.MyStatus = VehicleInGarage.Status.Repair;
+                SetModelName(ref m_Vehicle);
+                while (!ChooseVehicleType(ref m_Vehicle));
+                m_Vehicle.MyVehicle.LicenseNumber = m_MyLicenseNumber;
+                while (!SetWheelPressure(ref m_Vehicle));
+                while (!SetEnergy(ref m_Vehicle)) ;
+                if (m_Vehicle.MyVehicle.MyTypeVehicle is Car)
+                {
+                    while (!ChooseColorCar(ref m_Vehicle)) ;
+                    while (!SetNumOfDoors(ref m_Vehicle)) ;
+                }
+                else if (m_Vehicle.MyVehicle.MyTypeVehicle is Motorcycle)
+                {
+                    SetTypeLiLicense(ref m_Vehicle);
+                    SetEngineCapacity(ref m_Vehicle);
+                }
+                else
+                {
+                    while (!SetTruckDefinitions(ref m_Vehicle)) ;
+                }
+                while (!InsertOwnerDetails(ref m_Vehicle)) ;
+                m_ArrayVehicle.Add(m_Vehicle);
             }
             else
             {
-                while (!ChoosVehicleType(ref VehicleToAdd));
-                while (!SetEnergy(ref VehicleToAdd));
-                while(!DefiningCarProperties(ref VehicleToAdd));
+                m_Message = string.Format("this car already exists.");
+                m_Vehicle.MyStatus = VehicleInGarage.Status.Repair;
+                Console.WriteLine(m_Message);
             }
-        }     
+        }
+        protected void InflatingWheels()
+        {
+            m_Message = string.Format("Please enter the license number");
+            Console.WriteLine(m_Message);
+            m_MyLicenseNumber = Console.ReadLine();
+            m_Vehicle = SearchLicenseNumber();
+            foreach (Wheel wheel in m_Vehicle.MyVehicle.MyTypeVehicle.CollectWheels)
+            {
+                wheel.CurrentAirPressure = wheel.MaxAirPressure;
+            }
+        }
+        protected void PrintByStatus(VehicleInGarage.Status i_StatusToPrint)
+        {
+            m_Message = string.Format("{0}:", i_StatusToPrint);
+            Console.WriteLine(m_Message);
+            int index = 1;
+            foreach (VehicleInGarage vehicles in m_ArrayVehicle)
+            {
+                if (vehicles.MyStatus == i_StatusToPrint)
+                {
+                    Console.WriteLine(string.Format("{0}) {1}", index, vehicles.MyVehicle.LicenseNumber));
+                    index++;
+                }
+            }
+        }
+        protected void PrintLicenseNumber()
+        {
+            m_Message = string.Format(@"Do you want to print by status category?
+1. yes
+2. no");
+            int index = 1;
+            Console.WriteLine(m_Message);
+            input = Console.ReadLine();
+            try
+            {
+                switch (input)
+                {
+                    case "1":
+                    case "yes":
+                        {
+                            for (; index < sizeof(VehicleInGarage.Status); index++ )
+                            {
+                                PrintByStatus((VehicleInGarage.Status)index);
+                            }
+                            break;
+                        }
+                    case "2":
+                    case "no":
+                        {
+                            foreach (VehicleInGarage vehicles in m_ArrayVehicle)
+                            {
+                                
+                                Console.WriteLine(string.Format("{0}) {1}", index, vehicles.MyVehicle.LicenseNumber));
+                                index++;
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            throw new Exception();
+                        }
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid selection");
+            }
+        }
+        protected void ChangeStatus()
+        {
+            m_Vehicle = SearchLicenseNumber();
+            if (m_Vehicle != null)
+            {
+                m_Message = string.Format(@"What type of motorcycle license do you have?
+1.Repair
+2.Fixed
+3.Paid");
+                Console.WriteLine(m_Message);
+                input = Console.ReadLine();
+                try
+                {
+                    switch (input)
+                    {
+                        case "1":
+                        case "Repair":
+                            {
+                                m_Vehicle.MyStatus = VehicleInGarage.Status.Repair;
+                                break;
+                            }
+                        case "2":
+                        case "Fixed":
+                            {
+                                m_Vehicle.MyStatus = VehicleInGarage.Status.Fixed;
+                                break;
+                            }
+                        case "3":
+                        case "Paid":
+                            {
+                                m_Vehicle.MyStatus = VehicleInGarage.Status.Paid;
+                                break;
+                            }
+                        default:
+                            throw new Exception("Invalid selection");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+            else
+            {
+                m_Message = string.Format("Vehicle does not exist.");
+            }
+        }
+        protected void RemoveVehicle()
+        {
+            m_Vehicle = SearchLicenseNumber();
+            m_MyLicenseNumber = m_Vehicle.MyVehicle.LicenseNumber;
+            m_ArrayVehicle.Remove(m_Vehicle);
+            m_Message = string.Format("The vehicle {0} removed", m_MyLicenseNumber);
+            Console.WriteLine(m_Message);
+        }
+        public void StartGarage()
+        {
+            do
+            {
+                if (m_ArrayVehicle.Count == 0)
+                {
+                    m_Message = string.Format(@"Choose the following option:
+1. Add a vehicle
+2. Exite");
+                    Console.WriteLine(m_Message);
+                    input = Console.ReadLine();
+                    try
+                    {
+                        switch (input)
+                        {
+                            case "1":
+                            case "Add a vehicle":
+                                {
+                                    Add();
+                                    break;
+                                }
+                            case "2":
+                            case "Exite":
+                                {
+                                    m_Exit = true;
+                                    break;
+                                }
+                            default:
+                                {
+                                    throw new Exception("Invalid selection");
+                                }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                }
+                else
+                {
+                    m_Message = string.Format(@"Choose the following option:
+1. Add a vehicle
+2. Printing a number of licenses
+3. Change in vehicle status
+4. To inflate the tires of a car to the maximum
+5. To fill the vehicle's energy source
+6. Printing full vehicle data
+7. Reamove Vehicle
+8. Exite");
+                    Console.WriteLine(m_Message);
+                    input = Console.ReadLine();
+                    try
+                    {
+                        switch (input)
+                        {
+                            case "1":
+                            case "Add a vehicle":
+                                {
+                                    Add();
+                                    break;
+                                }
+                            case "2":
+                            case "Printing a number of licenses":
+                                {
+                                    PrintLicenseNumber();
+                                    break;
+                                }
+                            case "3":
+                            case "Change in vehicle status":
+                                {
+                                    ChangeStatus();
+                                    break;
+                                }
+                            case "4":
+                            case "To inflate the tires of a car to the maximum":
+                                {
+                                    InflatingWheels();
+                                    break;
+                                }
+                            case "5":
+                            case "To fill the vehicle's energy source":
+                                {
+                                    m_Vehicle = SearchLicenseNumber();
+                                    if(m_Vehicle != null)
+                                    {
+                                        while(!SetEnergy(ref m_Vehicle));
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not found");
+                                    }
+                                    break;
+                                }
+                            case "6":
+                            case "Printing full vehicle data":
+                                {
+                                    m_Vehicle = SearchLicenseNumber();
+                                    if (m_Vehicle != null)
+                                    {
+                                        Console.WriteLine(m_Vehicle);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not found");
+                                    }
+                                    break;
+                                }
+                            case "7":
+                            case "Reamove Vehicle":
+                                {
+                                    RemoveVehicle();
+                                    break;
+                                }
+                            case "8":
+                            case "Exite":
+                                {
+                                    m_Exit = true;
+                                    break;
+                                }
+                            default:
+                                {
+                                    throw new Exception("Invalid selection");
+                                }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                }
+            } while (!m_Exit);
+        }
     }
-
-
-
 }
