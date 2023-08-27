@@ -3,24 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.GarageLogic", "Project1\Ex03.GarageLogic.csproj", "{B80F2BF8-AE88-41A4-A6BE-921EFB50E07B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.ConsoleUI", "Project2\Ex03.ConsoleUI.csproj", "{53957C01-5480-4D8E-A3B8-39A113594E4E}"
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "Ex03.ConsoleUI", "Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe", "{2009B6E4-CDA0-4631-A85D-E62573424E87}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe
+		RemoteMachine = LAPTOP-5MCM5GN3
+		StartingDirectory = C:\Users\idoel\OneDrive - Sapir College\קורסים\שנה ב\c#\תרגילים\CS_assignment3\C23 Ex02 Sagi 316584622 Ido 316476340\Ex03.ConsoleUI\bin\Debug
+		Environment = Default
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+		IORedirection = Auto
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B80F2BF8-AE88-41A4-A6BE-921EFB50E07B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B80F2BF8-AE88-41A4-A6BE-921EFB50E07B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B80F2BF8-AE88-41A4-A6BE-921EFB50E07B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B80F2BF8-AE88-41A4-A6BE-921EFB50E07B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53957C01-5480-4D8E-A3B8-39A113594E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53957C01-5480-4D8E-A3B8-39A113594E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53957C01-5480-4D8E-A3B8-39A113594E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53957C01-5480-4D8E-A3B8-39A113594E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2009B6E4-CDA0-4631-A85D-E62573424E87}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
