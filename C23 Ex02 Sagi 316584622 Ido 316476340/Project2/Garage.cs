@@ -44,6 +44,7 @@ namespace Project2
         }
         protected bool ChooseVehicleType(ref VehicleInGarage o_NewVehicle)
         {
+            Vehicle newVehicleToCreate = new Vehicle();
 
             m_Message = string.Format(@"Please choose the vehicle type
 1. Fuel car
@@ -60,37 +61,42 @@ namespace Project2
                     case "1":
                     case "Fuel car":
                         {
-                            o_NewVehicle.MyVehicle.MyEngine = new Fuel();
-                            o_NewVehicle.MyVehicle.MyTypeVehicle = new Car();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 1);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Fuel();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Car();
+                            break;
                         }
                     case "2":
                     case "Fuel motorcycle":
                         {
-                            o_NewVehicle.MyVehicle.MyEngine = new Fuel();
-                            o_NewVehicle.MyVehicle.MyTypeVehicle = new Motorcycle();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 2);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Fuel();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Motorcycle();
+                            break;
                         }
                     case "3":
                     case "Electric car":
                         {
-                            o_NewVehicle.MyVehicle.MyEngine = new Electric();
-                            o_NewVehicle.MyVehicle.MyTypeVehicle = new Car();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 3);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Electric();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Car();
+                            break;
                         }
                     case "4":
                     case "Electric motorcycle":
                         {
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 4);
                             o_NewVehicle.MyVehicle.MyEngine = new Electric();
                             o_NewVehicle.MyVehicle.MyTypeVehicle = new Motorcycle();
-                            return true;
+                            break;
                         }
                     case "5":
                     case "Truck":
                         {
-                            o_NewVehicle.MyVehicle.MyEngine = new Fuel();
-                            o_NewVehicle.MyVehicle.MyTypeVehicle = new Truck();
-                            return true;
+                            NewVehicle.CreateVehicle(ref newVehicleToCreate, 5);
+                            //o_NewVehicle.MyVehicle.MyEngine = new Fuel();
+                            //o_NewVehicle.MyVehicle.MyTypeVehicle = new Truck();
+                            break;
                         }
                     default:
                         {
@@ -103,6 +109,8 @@ namespace Project2
                 Console.WriteLine(ex);
                 return false;
             }
+            o_NewVehicle.MyVehicle = newVehicleToCreate;
+            return true;
         }
         protected bool SetWheelPressure(ref VehicleInGarage o_NewVehicle)
         {
@@ -239,11 +247,9 @@ namespace Project2
                     Console.WriteLine(ex);
                     return false;
                 }
-                finally
-                {
                     o_TheVehicle.MyVehicle.MyEngine.MaxAmountEnergy = maxCapacity;
                     o_TheVehicle.MyVehicle.MyEngine.AmountEnergyLeft = remaining;
-                }
+                
             }
             else
             {
@@ -509,6 +515,7 @@ namespace Project2
             else
             {
                 m_Message = string.Format("this car already exists.");
+                m_Vehicle.MyStatus = Status.Repair;
                 Console.WriteLine(m_Message);
             }
         }
@@ -525,8 +532,7 @@ namespace Project2
         }
         protected void PrintByStatus(Status i_StatusToPrint)
         {
-            m_Message = string.Format(@"{0}:
-", i_StatusToPrint);
+            m_Message = string.Format("{0}:", i_StatusToPrint);
             Console.WriteLine(m_Message);
             int index = 1;
             foreach (VehicleInGarage vehicles in m_ArrayVehicle)
@@ -543,6 +549,7 @@ namespace Project2
             m_Message = string.Format(@"Do you want to print by status category?
 1. yes
 2. no");
+            int index = 1;
             Console.WriteLine(m_Message);
             input = Console.ReadLine();
             try
@@ -552,9 +559,9 @@ namespace Project2
                     case "1":
                     case "yes":
                         {
-                            for (int i = 1; i < sizeof(Status); i++ )
+                            for (; index < sizeof(Status); index++ )
                             {
-                                PrintByStatus((Status)i);
+                                PrintByStatus((Status)index);
                             }
                             break;
                         }
@@ -563,7 +570,7 @@ namespace Project2
                         {
                             foreach (VehicleInGarage vehicles in m_ArrayVehicle)
                             {
-                                int index = 1;
+                                
                                 Console.WriteLine(string.Format("{0}) {1}", index, vehicles.MyVehicle.LicenseNumber));
                                 index++;
                             }
@@ -627,10 +634,13 @@ namespace Project2
                 m_Message = string.Format("Vehicle does not exist.");
             }
         }
-        protected void ReamoveVehicle()
+        protected void RemoveVehicle()
         {
             m_Vehicle = SearchLicenseNumber();
+            m_MyLicenseNumber = m_Vehicle.MyVehicle.LicenseNumber;
             m_ArrayVehicle.Remove(m_Vehicle);
+            m_Message = string.Format("The vehicle {0} removed", m_MyLicenseNumber);
+            Console.WriteLine(m_Message);
         }
         public void StartGarage()
         {
@@ -638,8 +648,7 @@ namespace Project2
             {
                 if (m_ArrayVehicle.Count == 0)
                 {
-                    m_Message = string.Format(@"Empty garage - no information.
-Choose the following option:
+                    m_Message = string.Format(@"Choose the following option:
 1. Add a vehicle
 2. Exite");
                     Console.WriteLine(m_Message);
@@ -677,10 +686,11 @@ Choose the following option:
 1. Add a vehicle
 2. Printing a number of licenses
 3. Change in vehicle status
-3. To inflate the tires of a car to the maximum
-4. To fill the vehicle's energy source
-5. Printing full vehicle data
-6. Exite");
+4. To inflate the tires of a car to the maximum
+5. To fill the vehicle's energy source
+6. Printing full vehicle data
+7. Reamove Vehicle
+8. Exite");
                     Console.WriteLine(m_Message);
                     input = Console.ReadLine();
                     try
@@ -706,26 +716,46 @@ Choose the following option:
                                     break;
                                 }
                             case "4":
-                            case "To fill the vehicle's energy source":
+                            case "To inflate the tires of a car to the maximum":
                                 {
-                                    m_Vehicle = SearchLicenseNumber();
-                                    SetEnergy(ref m_Vehicle);
+                                    InflatingWheels();
                                     break;
                                 }
                             case "5":
-                            case "Printing full vehicle data":
+                            case "To fill the vehicle's energy source":
                                 {
                                     m_Vehicle = SearchLicenseNumber();
-                                    Console.WriteLine(m_Vehicle);
+                                    if(m_Vehicle != null)
+                                    {
+                                        SetEnergy(ref m_Vehicle);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not found");
+                                    }
                                     break;
                                 }
                             case "6":
-                            case "Reamove Vehicle":
+                            case "Printing full vehicle data":
                                 {
-                                    ReamoveVehicle();
+                                    m_Vehicle = SearchLicenseNumber();
+                                    if (m_Vehicle != null)
+                                    {
+                                        Console.WriteLine(m_Vehicle);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not found");
+                                    }
                                     break;
                                 }
                             case "7":
+                            case "Reamove Vehicle":
+                                {
+                                    RemoveVehicle();
+                                    break;
+                                }
+                            case "8":
                             case "Exite":
                                 {
                                     m_Exit = true;
